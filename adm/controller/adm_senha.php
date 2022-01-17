@@ -24,7 +24,7 @@ if(isset($_POST['adm_senha_atual']) and isset($_POST['adm_senha'])){
          $enviar = new EnviarEmail();
          
          $assunto = 'Alteração da senha ADM no site '. Sistema::DataAtualBR();
-         $destinatarios = array($email,  Config::SITE_EMAIL_ADM);
+         $destinatarios = array($email,  $_ENV['SITE_EMAIL_ADM']);
          $msg = '<h3> Foi feito alteração de senha ADM no site neste momento, nova senha:  ' . $senha_nova .'</h3>';
                   
          $enviar->Enviar($assunto, $msg, $destinatarios);

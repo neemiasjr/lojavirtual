@@ -35,16 +35,16 @@ if(isset($_POST['cli_nome']) and isset($_POST['cli_email']) and isset($_POST['cl
 
      //ASSIGNS PARA TEMPLATE
      $smarty->assign('NOME', $cli_nome);
-     $smarty->assign('SITE', Config::SITE_NOME);
+     $smarty->assign('SITE', $_ENV['SITE_NOME']);
      $smarty->assign('EMAIL', $cli_email);
      $smarty->assign('SENHA', $cli_senha);
      $smarty->assign('PAG_MINHA_CONTA', Rotas::pag_ClienteConta());
      $smarty->assign('SITE_HOME', Rotas::get_SiteHOME());
 
      $email = new EnviarEmail();
-     $assunto = 'Cadastro Efetuado - ' . Config::SITE_NOME;
+     $assunto = 'Cadastro Efetuado - ' . $_ENV['SITE_NOME'];
      $msg = $smarty->fetch('email_cliente_cadastro.tpl');
-	 $destinatarios = array($cli_email, Config::SITE_EMAIL_ADM);
+	 $destinatarios = array($cli_email, $_ENV['SITE_EMAIL_ADM']);
      $email->Enviar($assunto, $msg, $destinatarios);
 
 

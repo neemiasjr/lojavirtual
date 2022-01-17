@@ -31,7 +31,7 @@ if(isset($_POST['recovery'])):
          $enviar = new EnviarEmail();
          
          $assunto = 'Nova senha ADM do site '. Sistema::DataAtualBR();
-         $destinatarios = array($email,  Config::SITE_EMAIL_ADM);
+         $destinatarios = array($email,  $_ENV['SITE_EMAIL_ADM']);
          $msg = ' Nova senha no ADM do site, nova senha:  ' .$senha;
          
          

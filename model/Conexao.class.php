@@ -1,6 +1,6 @@
 <?php 
 
-Class Conexao extends Config{
+Class Conexao{
 	private $host, $user, $senha, $banco;
 
 	protected $obj, $itens=array(), $prefix;
@@ -11,11 +11,11 @@ Class Conexao extends Config{
 
 
 	function __construct(){
-		$this->host = self::BD_HOST;
-		$this->user = self::BD_USER;
-		$this->senha = self::BD_SENHA;
-		$this->banco = self::BD_BANCO;
-		$this->prefix = self::BD_PREFIX;
+		$this->host = $_ENV['DB_HOST'];
+		$this->user = $_ENV['DB_USER'];
+		$this->senha = $_ENV['DB_PASS'];
+		$this->banco = $_ENV['DB_NAME'];
+		$this->prefix = $_ENV['DB_PREFIX'];
 
 		try {
 			if($this->Conectar() == null){
@@ -41,6 +41,7 @@ Class Conexao extends Config{
 
 
 	function ExecuteSQL($query, array $params = NULL){
+		
 		$this->obj = $this->Conectar()->prepare($query);
 
 		if(!empty($params) && count($params) > 0){
@@ -48,6 +49,7 @@ Class Conexao extends Config{
 				$this->obj->bindvalue($key, $value);
 			}
 		}
+
 
 		return $this->obj->execute();
 	}

@@ -11,7 +11,7 @@
         
         <div class="col-md-6">
             <label>Produto</label>
-            <input type="text" name="pro_nome" id="pro_nome" class="form-control"  required value="{$PRO.1.pro_nome}">
+            <input type="text" name="pro_nome" id="pro_nome" class="form-control"  required value="{$PRO.pro_nome}">
             
         </div>
         
@@ -22,7 +22,7 @@
          
             <select name="pro_categoria" id="pro_categoria" class="form-control" required>
               
-                <option value="{$PRO.1.cate_id}"> {$PRO.1.cate_nome} </option>                           
+                <option value="{$PRO.cate_id}"> {$PRO.cate_nome} </option>                           
                 <option value=""> Escolha</option>                           
                     {foreach from=$CATEGORIAS item=C}                    
                 <option value="{$C.cate_id}">{$C.cate_nome}</option>                                        
@@ -41,9 +41,9 @@
                 
                    
                 
-                <option value="" {if(empty($PRO.1.pro_ativo)} sdflsdl {/if}> Escolha..</option>
-                <option value="NAO" {if($PRO.1.pro_ativo == '0') } selected {/if}> Não </option>
-                <option value="SIM" {if($PRO.1.pro_ativo == '1') } selected {/if}> Sim </option>
+                <option value="" {if (empty($PRO.pro_ativo))} selected {/if} > Escolha..</option>
+                <option value="0" {if $PRO.pro_ativo == '0'} selected {/if} > Não </option>
+                <option value="1" {if $PRO.pro_ativo == '1'} selected {/if} > Sim </option>
                 
             </select>
             
@@ -56,14 +56,14 @@
         
            <div class="col-md-3">
             <label>Modelo</label>
-            <input type="text" name="pro_modelo" id="pro_modelo" class="form-control " value="{$PRO.1.pro_modelo}"  >
+            <input type="text" name="pro_modelo" id="pro_modelo" class="form-control " value="{$PRO.pro_modelo}"  >
             
         </div>
         
         
            <div class="col-md-2">
             <label>Referencia</label>
-            <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="{$PRO.1.pro_ref}" >
+            <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="{$PRO.pro_ref}" >
             
         </div>
         
@@ -71,7 +71,7 @@
         
            <div class="col-md-2">
             <label>Valor</label>
-            <input type="text" name="pro_valor" id="pro_valor" class="form-control" required value="{$PRO.1.pro_valor}">
+            <input type="text" name="pro_valor" id="pro_valor" class="form-control" required value="{$PRO.pro_valor}">
             
         </div>
         
@@ -79,7 +79,7 @@
         
            <div class="col-md-2">
             <label>Estoque</label>
-            <input type="text" name="pro_estoque" id="pro_estoque" class="form-control" required value="{$PRO.1.pro_estoque}">
+            <input type="text" name="pro_estoque" id="pro_estoque" class="form-control" required value="{$PRO.pro_estoque}">
             
           </div>
         
@@ -87,28 +87,28 @@
         
            <div class="col-md-2">
             <label>Peso</label>
-            <input type="text" name="pro_peso" id="pro_peso" class="form-control" required value="{$PRO.1.pro_peso}">
+            <input type="text" name="pro_peso" id="pro_peso" class="form-control" required value="{$PRO.pro_peso}">
             
           </div>
         
         
            <div class="col-md-2">
             <label>Altura</label>
-            <input type="text" name="pro_altura" id="pro_altura" class="form-control" required value="{$PRO.1.pro_altura}">
+            <input type="text" name="pro_altura" id="pro_altura" class="form-control" required value="{$PRO.pro_altura}">
             
           </div>
         
         
            <div class="col-md-2">
             <label>Largura</label>
-            <input type="text" name="pro_largura" id="pro_largura" class="form-control" required value="{$PRO.1.pro_largura}">
+            <input type="text" name="pro_largura" id="pro_largura" class="form-control" required value="{$PRO.pro_largura}">
             
           </div>
         
         
            <div class="col-md-2">
             <label>Comprimento</label>
-            <input type="text" name="pro_comprimento" id="pro_comprimento" class="form-control" required value="{$PRO.1.pro_comprimento}">
+            <input type="text" name="pro_comprimento" id="pro_comprimento" class="form-control" required value="{$PRO.pro_comprimento}">
             
           </div>
         
@@ -117,7 +117,7 @@
             
             <div class="col-md-4">
                <hr> 
-               <img src="{$PRO.1.pro_img}" class="thumbnail" alt="">
+               <img src="{$PRO.pro_img}" class="thumbnail" alt="">
                 
             </div>
             
@@ -128,9 +128,9 @@
                  <!--- campos para adicionar a imagem---->
                  <input type="file" name="pro_img" class="form-control btn btn-default" id="pro_img">
                  <!--pega o nome da imagem atual -->
-                 <input type="hidden" name="pro_img_atual" id="pro_img_atual" value="{$PRO.1.pro_img_atual}">
+                 <input type="hidden" name="pro_img_atual" id="pro_img_atual" value="{$PRO.pro_img_atual}">
                  <!----pega o caminho completo da imagem atual -->
-                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="{$PRO.1.pro_img_arquivo}">
+                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="{$PRO.pro_img_arquivo}">
               
 
           
@@ -151,7 +151,7 @@
            <div class="col-md-12">
             <label>Descrição</label>
            
-            <textarea name="pro_desc" id="pro_desc" rows="5" class="form-control" >{$PRO.1.pro_desc}</textarea>
+            <textarea name="pro_desc" id="pro_desc" rows="5" class="form-control" >{$PRO.pro_desc}</textarea>
 
               <script> 
               tinymce.init({ selector:'textarea'  });
@@ -166,7 +166,7 @@
         
            <div class="col-md-12">
             <label>Slug</label>
-            <input type="text" readonly name="pro_slug" id="pro_slug"   class="form-control" value="{$PRO.1.pro_slug}">
+            <input type="text" readonly name="pro_slug" id="pro_slug"   class="form-control" value="{$PRO.pro_slug}">
             
           </div>
         
@@ -188,7 +188,7 @@
             </div>
 
     
-        <input type="hidden" name="pro_id" value="{$PRO.1.pro_id}">
+        <input type="hidden" name="pro_id" value="{$PRO.pro_id}">
 
 
 
@@ -238,11 +238,11 @@
 
 
 
-                    <input type="hidden" name="pro_id_apagar" value="{$PRO.1.pro_id}">
+                    <input type="hidden" name="pro_id_apagar" value="{$PRO.pro_id}">
                     <input type="hidden" name="pro_apagar" value="SIM">
                     
                        <!----pega o caminho completo da imagem atual -->
-                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="{$PRO.1.pro_img_arquivo}">
+                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="{$PRO.pro_img_arquivo}">
 
                 </form>
 

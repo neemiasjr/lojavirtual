@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.40, created on 2022-01-17 15:38:13
+/* Smarty version 3.1.40, created on 2022-01-17 17:27:26
   from '/Users/neemiasjr/git-desafios-empresas/desafio-zpt/old/Modulo5/Arquivos/lojafinalizada/loja/adm/view/adm_produtos_editar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_61e5b795c94cf9_50449483',
+  'unifunc' => 'content_61e5d12e1a3a08_41139787',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6ecabdcc0bca566d78371cc0b7525c8787510bc6' => 
     array (
       0 => '/Users/neemiasjr/git-desafios-empresas/desafio-zpt/old/Modulo5/Arquivos/lojafinalizada/loja/adm/view/adm_produtos_editar.tpl',
-      1 => 1505142774,
+      1 => 1642451237,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_61e5b795c94cf9_50449483 (Smarty_Internal_Template $_smarty_tpl) {
+function content_61e5d12e1a3a08_41139787 (Smarty_Internal_Template $_smarty_tpl) {
 echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['GET_TEMA']->value;?>
 /tema/js/tinymce/tinymce.min.js"><?php echo '</script'; ?>
@@ -37,7 +37,7 @@ echo '<script'; ?>
         
         <div class="col-md-6">
             <label>Produto</label>
-            <input type="text" name="pro_nome" id="pro_nome" class="form-control"  required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_nome'];?>
+            <input type="text" name="pro_nome" id="pro_nome" class="form-control"  required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_nome'];?>
 ">
             
         </div>
@@ -49,8 +49,8 @@ echo '<script'; ?>
          
             <select name="pro_categoria" id="pro_categoria" class="form-control" required>
               
-                <option value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['cate_id'];?>
-"> <?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['cate_nome'];?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['cate_id'];?>
+"> <?php echo $_smarty_tpl->tpl_vars['PRO']->value['cate_nome'];?>
  </option>                           
                 <option value=""> Escolha</option>                           
                     <?php
@@ -76,13 +76,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         <div class="col-md-2">
             <label>Ativo</label>
             <select name="pro_ativo" id="pro_cativo" class="form-control" required >
-              
-                <option value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_ativo'];?>
-"> <?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_ativo'];?>
- </option>
-                <option value=""> Escolha </option>
-                <option value="NAO"> Não </option>
-                <option value="SIM"> Sim </option>
+                
+                   
+                
+                <option value="" <?php if ((empty($_smarty_tpl->tpl_vars['PRO']->value['pro_ativo']))) {?> selected <?php }?> > Escolha..</option>
+                <option value="0" <?php if ($_smarty_tpl->tpl_vars['PRO']->value['pro_ativo'] == '0') {?> selected <?php }?> > Não </option>
+                <option value="1" <?php if ($_smarty_tpl->tpl_vars['PRO']->value['pro_ativo'] == '1') {?> selected <?php }?> > Sim </option>
                 
             </select>
             
@@ -95,7 +94,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-3">
             <label>Modelo</label>
-            <input type="text" name="pro_modelo" id="pro_modelo" class="form-control " value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_modelo'];?>
+            <input type="text" name="pro_modelo" id="pro_modelo" class="form-control " value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_modelo'];?>
 "  >
             
         </div>
@@ -103,7 +102,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Referencia</label>
-            <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_ref'];?>
+            <input type="text" name="pro_ref" id="pro_ref" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_ref'];?>
 " >
             
         </div>
@@ -112,7 +111,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Valor</label>
-            <input type="text" name="pro_valor" id="pro_valor" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_valor'];?>
+            <input type="text" name="pro_valor" id="pro_valor" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_valor'];?>
 ">
             
         </div>
@@ -121,7 +120,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Estoque</label>
-            <input type="text" name="pro_estoque" id="pro_estoque" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_estoque'];?>
+            <input type="text" name="pro_estoque" id="pro_estoque" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_estoque'];?>
 ">
             
           </div>
@@ -130,7 +129,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Peso</label>
-            <input type="text" name="pro_peso" id="pro_peso" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_peso'];?>
+            <input type="text" name="pro_peso" id="pro_peso" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_peso'];?>
 ">
             
           </div>
@@ -138,7 +137,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Altura</label>
-            <input type="text" name="pro_altura" id="pro_altura" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_altura'];?>
+            <input type="text" name="pro_altura" id="pro_altura" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_altura'];?>
 ">
             
           </div>
@@ -146,7 +145,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Largura</label>
-            <input type="text" name="pro_largura" id="pro_largura" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_largura'];?>
+            <input type="text" name="pro_largura" id="pro_largura" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_largura'];?>
 ">
             
           </div>
@@ -154,7 +153,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-2">
             <label>Comprimento</label>
-            <input type="text" name="pro_comprimento" id="pro_comprimento" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_comprimento'];?>
+            <input type="text" name="pro_comprimento" id="pro_comprimento" class="form-control" required value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_comprimento'];?>
 ">
             
           </div>
@@ -164,7 +163,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             
             <div class="col-md-4">
                <hr> 
-               <img src="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_img'];?>
+               <img src="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_img'];?>
 " class="thumbnail" alt="">
                 
             </div>
@@ -176,10 +175,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                  <!--- campos para adicionar a imagem---->
                  <input type="file" name="pro_img" class="form-control btn btn-default" id="pro_img">
                  <!--pega o nome da imagem atual -->
-                 <input type="hidden" name="pro_img_atual" id="pro_img_atual" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_img_atual'];?>
+                 <input type="hidden" name="pro_img_atual" id="pro_img_atual" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_img_atual'];?>
 ">
                  <!----pega o caminho completo da imagem atual -->
-                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_img_arquivo'];?>
+                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_img_arquivo'];?>
 ">
               
 
@@ -201,7 +200,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
            <div class="col-md-12">
             <label>Descrição</label>
            
-            <textarea name="pro_desc" id="pro_desc" rows="5" class="form-control" ><?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_desc'];?>
+            <textarea name="pro_desc" id="pro_desc" rows="5" class="form-control" ><?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_desc'];?>
 </textarea>
 
               <?php echo '<script'; ?>
@@ -219,7 +218,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
            <div class="col-md-12">
             <label>Slug</label>
-            <input type="text" readonly name="pro_slug" id="pro_slug"   class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_slug'];?>
+            <input type="text" readonly name="pro_slug" id="pro_slug"   class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_slug'];?>
 ">
             
           </div>
@@ -242,7 +241,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             </div>
 
     
-        <input type="hidden" name="pro_id" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_id'];?>
+        <input type="hidden" name="pro_id" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_id'];?>
 ">
 
 
@@ -293,12 +292,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
 
 
-                    <input type="hidden" name="pro_id_apagar" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_id'];?>
+                    <input type="hidden" name="pro_id_apagar" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_id'];?>
 ">
                     <input type="hidden" name="pro_apagar" value="SIM">
                     
                        <!----pega o caminho completo da imagem atual -->
-                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value[1]['pro_img_arquivo'];?>
+                 <input type="hidden" name="pro_img_arquivo" id="pro_img_arquivo" value="<?php echo $_smarty_tpl->tpl_vars['PRO']->value['pro_img_arquivo'];?>
 ">
 
                 </form>

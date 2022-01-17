@@ -10,14 +10,14 @@ Class Rotas{
 
 
 	static function get_SiteHOME(){
-		if(!empty(Config::SITE_PASTA)){
-			return Config::SITE_URL . '/' .Config::SITE_PASTA;
+		if(!empty($_ENV['SITE_HOME'])){
+		  return $_ENV['SITE_URL'] . '/' . $_ENV['SITE_HOME'];
 		}
 		return Config::SITE_URL;
 	}
 
 	static function get_SiteRAIZ(){
-		return $_SERVER['DOCUMENT_ROOT'] . '/' .Config::SITE_PASTA;
+		return $_SERVER['DOCUMENT_ROOT'] . '/' .$_ENV['SITE_HOME'];
 	}
 
 	static function get_SiteTEMA(){

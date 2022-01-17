@@ -33,8 +33,8 @@ $categorias->GetCategorias();
 
 //valores para o template
 $smarty->assign('GET_TEMA', Rotas::get_SiteTEMA());
-$smarty->assign('TITULO_SITE', Config::SITE_NOME);
-$smarty->assign('SITE_NOME', Config::SITE_NOME);
+$smarty->assign('TITULO_SITE', $_ENV['SITE_NOME']);
+$smarty->assign('SITE_NOME', $_ENV['SITE_NOME']);
 $smarty->assign('GET_SITE_HOME', Rotas::get_SiteHOME());
 $smarty->assign('GET_SITE_ADM', Rotas::get_SiteADM());
 $smarty->assign('PAG_ADM_CLIENTE', Rotas::pag_ClientesADM());

@@ -83,8 +83,8 @@ $produtos->GetProdutosID($id);
 
 $smarty->assign('CATEGORIAS', $categorias->GetItens());
 $smarty->assign('GET_TEMA', Rotas::get_SiteTEMA());
-$smarty->assign('PRO', $produtos->GetItens());
-
+$smarty->assign('PRO', $produtos->GetItens()[1]);
+//echo json_encode($produtos->GetItens());
 $smarty->display('adm_produtos_editar.tpl');
 
 ?>

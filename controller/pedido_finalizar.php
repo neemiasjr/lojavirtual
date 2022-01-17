@@ -39,7 +39,7 @@ if(!Login::Logado()){
 	$smarty->assign('PRO', $carrinho->GetCarrinho());
 	$smarty->assign('TOTAL', Sistema::MoedaBR($carrinho->GetTotal()));
 	$smarty->assign('NOME_CLIENTE', $_SESSION['CLI']['cli_nome']);
-	$smarty->assign('SITE_NOME', Config::SITE_NOME);
+	$smarty->assign('SITE_NOME', $_ENV['SITE_NOME']);
 	$smarty->assign('SITE_HOME', Rotas::get_SiteHOME());
 	$smarty->assign('PAG_MINHA_CONTA', Rotas::pag_CLientePedidos());
 	
@@ -60,7 +60,7 @@ if(!Login::Logado()){
 
 	$email = new EnviarEmail();
 
-	$destinatarios = array(Config::SITE_EMAIL_ADM, $_SESSION['CLI']['cli_email']);
+	$destinatarios = array($_ENV['SITE_EMAIL_ADM'], $_SESSION['CLI']['cli_email']);
 	$assunto = 'Pedido da Loja Freitas - ' . Sistema::DataAtualBR();
 	$msg = $smarty->fetch('email_compra.tpl');
 

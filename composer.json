@@ -1,17 +1,18 @@
 {
-    "require": {
-        "smarty/smarty": "~3.1",
-        "phpmailer/phpmailer": "~5.2"
-    },
-
-    "config": {
-    	"vendor-dir" : "lib/"
-    },
-
-    "autoload": {
-    	"classmap" : ["model/"]
-    }
-
-    
-
+  "require": {
+    "smarty/smarty": "~3.1",
+    "phpmailer/phpmailer": "~5.2",
+    "vlucas/phpdotenv": "^5.4",
+    "php": "^7.4",
+    "ext-gd": "*",
+    "ext-redis": "5.x"
+  },
+  "config": {
+    "vendor-dir": "lib/"
+  },
+  "autoload": {
+    "classmap": [
+      "model/"
+    ]
+  }
 }
