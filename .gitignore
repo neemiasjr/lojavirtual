@@ -13,4 +13,5 @@ yarn-error.log
 view/compile/
 media/images/cache/
 arquivosgerais/
-lib/w
+lib/
+view/compile
