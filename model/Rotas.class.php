@@ -13,7 +13,7 @@ Class Rotas{
 		if(!empty($_ENV['SITE_HOME'])){
 		  return $_ENV['SITE_URL'] . '/' . $_ENV['SITE_HOME'];
 		}
-		return Config::SITE_URL;
+		return $_ENV['SITE_URL'];
 	}
 
 	static function get_SiteRAIZ(){
