@@ -199,7 +199,7 @@
             <div class="row" id="rodape">
                 <center>
                     <h4>{$TITULO_SITE}</h4>
-                    <P>Todos os Direitos Reservados - Hugo Vasconcelos - Q-Cursos - Data Atual: {$DATA}</P>
+                    <P>Todos os Direitos Reservados - Souza Tech Sistemas de TI</P>
                 </center>
             
             </div><!-- fim div rodape-->

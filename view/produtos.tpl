@@ -22,7 +22,7 @@
          <li class="col-md-4">
 
            <div class="thumbnail">
-             {if ($P.pro_ativo == 1) }
+             {if ($P.pro_ativo == 1 && $P.pro_estoque >= 1) }
                <a href="{$PRO_INFO}/{$P.pro_id}/{$P.pro_slug}">
 
                  <img src="{$P.pro_img}" width="200" height="200" alt="">
@@ -36,20 +36,33 @@
                  </div>
 
                </a>
-             {else}
+             {elseif $P.pro_ativo == 0}
+             
                <div class="imagem-disabled">
                  <img src="{$P.pro_img}" width="200" height="200" alt="">
 
                  <div class="caption">
 
-                   <h4 class="text-center"><s>{$P.pro_nome}</s></h4>
+                   <h4 class="text-center">{$P.pro_nome}</h4>
 
                    <h3 class="text-center text-danger"><s>{$P.pro_valor}</s></h3>
 
-                   <h2 class="text-center text-danger"><u>Indisponível</u></h2>
+                   <h3 class="text-center alert alert-danger">Indisponível</h3>
                  </div>
                </div>
+             {else}
+              <div class="imagem-disabled">
+                <img src="{$P.pro_img}" width="200" height="200" alt="">
+
+                <div class="caption">
+
+                  <h4 class="text-center"><s>{$P.pro_nome}</s></h4>
+
+                  <h3 class="alert alert-info">Sem estoque</h3>
+                </div>
+              </div>
              {/if}
+
 
 
 
