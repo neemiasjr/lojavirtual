@@ -37,7 +37,7 @@ class PagamentoPS extends Conexao{
             parent::__construct();
             
             /** verifico se produção  ou sandbox * */
-            switch (Config::PS_AMBIENTE):
+            switch ($_ENV['PS_AMBIENTE']):
                 
                 // ambiente de testes
                 case 'sandbox':
@@ -46,7 +46,7 @@ class PagamentoPS extends Conexao{
                    $this->psURL        = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html';
                    $this->psURL_Script = 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js'; 
                    $this->psURL_Notificacao = 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/';
-                   $this->token        = Config::PS_TOKEN_SBX;
+                   $this->token        = $_ENV['PS_TOKEN_SBX'];
                    
                    break;
                // ambiente de produção real
@@ -56,7 +56,7 @@ class PagamentoPS extends Conexao{
                    $this->psURL        = 'https://pagseguro.uol.com.br/v2/checkout/payment.html';
                    $this->psURL_Script = 'https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js'; 
                    $this->psURL_Notificacao = 'https://ws.pagseguro.uol.com.br/v3/transactions/';
-                   $this->token        = Config::PS_TOKEN;
+                   $this->token        = $_ENV['PS_TOKEN'];
                    
                    break;
             endswitch;
@@ -69,7 +69,7 @@ class PagamentoPS extends Conexao{
     public function Pagamento($cliente = array(), $pedido = array(), $produtos = array()) {
      
                 
-        $dados['email']    = Config::PS_EMAIL;
+        $dados['email']    = $_ENV['PS_EMAIL'];
         $dados['token']    = $this->token;
         $dados['currency']   = 'BRL';               
         $dados['reference']    = $pedido['ref']; // referencia pedido 
@@ -176,7 +176,7 @@ class PagamentoPS extends Conexao{
     public function PagamentoITENS($cliente = array(), $pedido = array(), $produtos = array()) {
      
                 
-        $dados['email']    = Config::PS_EMAIL;
+        $dados['email']    = $_ENV['PS_EMAIL'];
         $dados['token']    = $this->token;
         $dados['currency']   = 'BRL';               
         $dados['reference']    = $pedido['ped_ref']; // referencia pedido 
@@ -289,7 +289,7 @@ class PagamentoPS extends Conexao{
 
 
             // credenciais pagseguro pegando da classe Config
-            $email = Config::PS_EMAIL;
+            $email = $_ENV['PS_EMAIL'];
             $token = $this->token;
             // chamo a URL da notificação      
             $url = $this->psURL_Notificacao .'?email=' . $email . '&token=' . $token.'&reference='.$ref;
@@ -393,7 +393,7 @@ class PagamentoPS extends Conexao{
         if (isset($_POST['notificationType']) && $_POST['notificationType'] == 'transaction'):
 
             // credenciais pagseguro pegando da classe Config
-            $email = Config::PS_EMAIL;
+            $email = $_ENV['PS_EMAIL'];
             $token = $this->token;
             // chamo a URL da notificação      
             $url = $this->psURL_Notificacao . 'notifications/'.$_POST['notificationCode'] . '?email=' . $email . '&token=' . $token;
