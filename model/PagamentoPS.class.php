@@ -406,58 +406,73 @@ class PagamentoPS extends Conexao{
              
 			// verifica se não foi autorizado a requisição e para  tudo  
             if ($retorno == 'Unauthorized'):                
-             // caso não for autorizado posso mostrar algo aqui          
+                // caso não for autorizado posso mostrar algo aqui          
             else:
             
-            // pegando os dados retornados 
-            $this->xml = simplexml_load_string($retorno);
-            
-            
-              //--------tratando o status do pagamento
-            switch ($this->xml->status):
+                // pegando os dados retornados 
+                $this->xml = simplexml_load_string($retorno);
                 
-                case 1 : $this->status = "Processando";
-                    break;
-                case 2 : $this->status = "Analise";
-                    break;
-                case 3 : $this->status = "Pago";
-                    break;
-                case 4 : $this->status = "Pago";
-                    break;
-                case 7 : $this->status = "Cancelado";
-                    break;
-                
-            endswitch;
-            
-            //----tratando o tipo de pagamento
-            switch ($this->xml->paymentMethod->type):
-                
-                case 1 : $this->forma_pag = "Cartao";
-                    break;
-                case 2 : $this->forma_pag = "Boleto";
-                    break;
-                case 3 : $this->forma_pag = "TEF";
-                    break;
-                case 4 : $this->forma_pag = "Saldo PagSeguro";
-                    break;
-                case 5 : $this->forma_pag = "Oi Paggo";
-                    break;
-                
-            endswitch;
+                if (!empty($this->xml)) {
+                    //--------tratando o status do pagamento
+                    switch ($this->xml->status):
+                        
+                        case 1: 
+                            $this->status = "Processando";
+                            break;
+                        case 2: 
+                            $this->status = "Analise";
+                            break;
+                        case 3: 
+                            $this->status = "Pago";
+                            break;
+                        case 4: 
+                            $this->status = "Pago";
+                            break;
+                        case 7: 
+                            $this->status = "Cancelado";
+                            break;
+                        
+                    endswitch;
+                    
+                    //----tratando o tipo de pagamento
+                    switch ($this->xml->paymentMethod->type):
+                        
+                        case 1: 
+                            $this->forma_pag = "Cartao";
+                            break;
+                        case 2: 
+                            $this->forma_pag = "Boleto";
+                            break;
+                        case 3: 
+                            $this->forma_pag = "TEF";
+                            break;
+                        case 4: 
+                            $this->forma_pag = "Saldo PagSeguro";
+                            break;
+                        case 5: 
+                            $this->forma_pag = "Oi Paggo";
+                            break;
+                        
+                    endswitch;
 
-            //passo algumas variaveis que eu precisar 
-            $pago      = $this->status;
-            $codigo    = $this->xml->code;
-            $referencia= $this->xml->reference;
-            $forma_pag = $this->forma_pag;            
-            
-            
-            // atualiza pedido status
-            $this->PedidoUpdate($codigo, $pago, $forma_pag, $referencia);
-            // envia email 
-            $this->EnviarEmail();
-            
+                    //passo algumas variaveis que eu precisar
+                    $pago      = $this->status;
+                    $codigo    = $this->xml->code;
+                    $referencia= $this->xml->reference;
+                    $forma_pag = $this->forma_pag;
+                    
+                    
+                    // atualiza pedido status
+                    $this->PedidoUpdate($codigo, $pago, $forma_pag, $referencia);
+                    // envia email
+                    $this->EnviarEmail();
+                }
+
             endif; // fim do if Unauthorized
+                
+            
+            
+            
         
         // fim do ISSET POST notificationType
          endif;
