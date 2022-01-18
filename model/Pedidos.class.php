@@ -1,6 +1,12 @@
 <?php 
 
+
+
 class Pedidos extends Conexao{
+
+  public array $erro = [];
+
+
 	function __construct(){
 		parent::__construct();
 	}
@@ -8,7 +14,7 @@ class Pedidos extends Conexao{
 	function PedidoGravar($cliente, $cod, $ref, $freteValor=null, $freteTipo=null){
 
 		$retorno = FALSE;
-		 $query  = "INSERT INTO ".$this->prefix."pedidos ";   
+		 $query  = "INSERT INTO ".$_ENV['DB_PREFIX']."pedidos ";   
      	 $query .= "(ped_data, ped_hora, ped_cliente, ped_cod, ped_ref, ped_frete_valor, ped_frete_tipo, ped_pag_status)"; 
     	 $query .= " VALUES ";
      	 $query .= "(:data, :hora, :cliente, :cod, :ref, :frete_valor, :frete_tipo, :ped_pag_status)";
@@ -38,7 +44,7 @@ class Pedidos extends Conexao{
 	}
 
     function GetPedidosCliente($cliente=null){
-      $query = "SELECT * FROM {$this->prefix}pedidos p INNER JOIN {$this->prefix}clientes c";
+      $query = "SELECT * FROM {$_ENV['DB_PREFIX']}pedidos p INNER JOIN {$_ENV['DB_PREFIX']}clientes c";
       $query .= " ON p.ped_cliente = c.cli_id";
 
       if($cliente != null){
@@ -46,10 +52,10 @@ class Pedidos extends Conexao{
         $query .= " WHERE ped_cliente = {$cli}";
         $query .= " ORDER BY ped_id DESC ";
 
-        $query .= $this->PaginacaoLinks("ped_id", $this->prefix."pedidos WHERE ped_cliente=".(int)$cli);
+        $query .= $this->PaginacaoLinks("ped_id", $_ENV['DB_PREFIX']."pedidos WHERE ped_cliente=".(int)$cli);
         
       } else{
-        $query .= $this->PaginacaoLinks("ped_id", $this->prefix."pedidos");
+        $query .= $this->PaginacaoLinks("ped_id", $_ENV['DB_PREFIX']."pedidos");
       }
 
       $this->ExecuteSQL($query);
@@ -94,10 +100,10 @@ class Pedidos extends Conexao{
     function GetPedidosREF($ref){
         
           // monto a SQL
-        $query = "SELECT * FROM {$this->prefix}pedidos p INNER JOIN {$this->prefix}clientes c";
+        $query = "SELECT * FROM {$_ENV['DB_PREFIX']}pedidos p INNER JOIN {$_ENV['DB_PREFIX']}clientes c";
         $query.= " ON p.ped_cliente = c.cli_id";        
         $query .= " WHERE ped_ref = :ref";
-        $query .= $this->PaginacaoLinks("ped_id", $this->prefix."pedidos WHERE ped_ref = ".$ref);
+        $query .= $this->PaginacaoLinks("ped_id", $_ENV['DB_PREFIX']."pedidos WHERE ped_ref = ".$ref);
         
         // passando parametros
         $params = array(':ref'=>$ref);
@@ -112,12 +118,12 @@ class Pedidos extends Conexao{
      function GetPedidosDATA($data_ini,$data_fim){
         
          // montando a SQL
-        $query = "SELECT * FROM {$this->prefix}pedidos p INNER JOIN {$this->prefix}clientes c";
+        $query = "SELECT * FROM {$_ENV['DB_PREFIX']}pedidos p INNER JOIN {$_ENV['DB_PREFIX']}clientes c";
         $query.= " ON p.ped_cliente = c.cli_id";
         
         $query.= " WHERE ped_data between :data_ini AND :data_fim ";
 
-        $query .= $this->PaginacaoLinks("ped_id", $this->prefix."pedidos WHERE ped_data between ".$data_ini." AND ".$data_fim);
+        $query .= $this->PaginacaoLinks("ped_id", $_ENV['DB_PREFIX']."pedidos WHERE ped_data between ".$data_ini." AND ".$data_fim);
           
        // passando os parametros  
         $params = array(':data_ini'=>$data_ini, ':data_fim'=>$data_fim);
@@ -138,7 +144,7 @@ class Pedidos extends Conexao{
         // apagando o PEDIDO  
         
         // monto a minha SQL de apagar o pedido 
-        $query =  " DELETE FROM {$this->prefix}pedidos WHERE ped_cod = :ped_cod";        
+        $query =  " DELETE FROM {$_ENV['DB_PREFIX']}pedidos WHERE ped_cod = :ped_cod";        
         // parametros
         $params = array(':ped_cod'=>$ped_cod);
         // executo a minha SQL
@@ -147,7 +153,7 @@ class Pedidos extends Conexao{
         /// apos apagar o pedido apaga ITENS DO PEDIDO  
         
                     // monto a minha SQL de apagar os items 
-                 $query =  " DELETE FROM {$this->prefix}pedidos_itens WHERE item_ped_cod = :ped_cod";
+                 $query =  " DELETE FROM {$_ENV['DB_PREFIX']}pedidos_itens WHERE item_ped_cod = :ped_cod";
 
                  // parametros
                  $params = array(':ped_cod'=>$ped_cod);
@@ -162,23 +168,42 @@ class Pedidos extends Conexao{
 
 	function ItensGravar($codpedido){
 		$carrinho = new Carrinho();
+    $produtoPedido = new Produtos();
 		foreach ($carrinho->GetCarrinho() as $item) {
 			
-			$query  = "INSERT INTO ".$this->prefix."pedidos_itens ";
-	        $query .= "(item_produto, item_valor, item_qtd, item_ped_cod)";
-	        $query .= "VALUES  (:produto,:valor,:qtd,:cod)";
-                
-                $params = array(
-                ':produto' => $item['pro_id'],
-                ':valor'   => $item['pro_valor_us'],
-                ':qtd'     => (int)$item['pro_qtd'],
-                ':cod'     =>  $codpedido  
-                );
+      $query  = "INSERT INTO {$_ENV['DB_PREFIX']}pedidos_itens ";
+      $query .= "(item_produto, item_valor, item_qtd, item_ped_cod)";
+      $query .= "VALUES  (:produto,:valor,:qtd,:cod)";
+            
+      $params = array(
+      ':produto' => $item['pro_id'],
+      ':valor'   => $item['pro_valor_us'],
+      ':qtd'     => (int)$item['pro_qtd'],
+      ':cod'     =>  $codpedido  
+      );
 
-                $this->ExecuteSQL($query, $params);
-                
+      $this->ExecuteSQL($query, $params);
 
-		}
+      if(!empty($item['pro_id'])){
+        $produtoPedido->GetProdutosID($item['pro_id']);
+        $dadosProduto = $produtoPedido->GetItens();
+        
+        if(((int) $dadosProduto[1]['pro_estoque'] > 0) && ((int) $dadosProduto[1]['pro_estoque'] - (int) $item['pro_qtd'] > 0 )){ 
+          $valorAtualEstoque = (int) $dadosProduto[1]['pro_estoque'] - (int)$item['pro_qtd'];
+          
+          $query2 = "UPDATE {$_ENV['DB_PREFIX']}produtos SET pro_estoque = :qtde";
+          
+          $params2 = array(
+            ':qtde' => $valorAtualEstoque
+          );
+
+          $this->ExecuteSQL($query2, $params2);
+        }
+        
+        array_push($this->erro,"<span class='badge badge-danger'>Produto {$dadosProduto[1]['pro_nome']} sem estoque!!</span><br>");
+      }
+      array_push($this->erro,"<span class='badge badge-danger'>Produto não encontrado!!</span><br>");
+    }
 	}
 
 
@@ -188,6 +213,10 @@ class Pedidos extends Conexao{
         unset($_SESSION['PED']['ref']);
 		
 	}
+
+  function getErro(){
+    return $this->erro;
+  }
 
 }
 

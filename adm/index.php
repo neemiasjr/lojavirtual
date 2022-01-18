@@ -18,7 +18,21 @@ if(!isset($_SESSION['PED']['ref'])){
 }
 */
 
-require '../lib/autoload.php';
+require './../lib/autoload.php';
+
+if (!empty($_ENV['REDIS_URL'])) {
+	$redisUrlParts = parse_url($_ENV['REDIS_URL']);
+	ini_set('session.save_handler', 'redis');
+	ini_set('session.save_path', "tcp://$redisUrlParts[host]:$redisUrlParts[port]?auth=$redisUrlParts[pass]");
+}
+
+
+//################Habilitando variaveis de ambiente .env ou do Sistema operacional########
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
+
+
 
 if(!Login::LogadoADM()){
 	Rotas::Redirecionar(1, 'login.php');

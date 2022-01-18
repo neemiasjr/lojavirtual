@@ -53,11 +53,6 @@ if(!Login::Logado()){
 
 
 
-	
-
-
-
-
 	$email = new EnviarEmail();
 
 	$destinatarios = array($_ENV['SITE_EMAIL_ADM'], $_SESSION['CLI']['cli_email']);
@@ -67,7 +62,7 @@ if(!Login::Logado()){
 	$email->Enviar($assunto, $msg, $destinatarios);
 
 	if($pedido->PedidoGravar($cliente, $cod, $ref, $frete)){
-
+			
 			$pag = new PagamentoPS();
       
             $pag->Pagamento($_SESSION['CLI'], $_SESSION['PED'], $carrinho->GetCarrinho());

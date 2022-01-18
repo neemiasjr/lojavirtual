@@ -18,16 +18,16 @@ class EnviarEmail extends PHPMailer {
 		// modo debug 0=off 1 e 2=mostram informações do envio ou erros
         $this->SMTPDebug = 0;
 		//Indica a porta do seu servidor
-        $this->Port = Config::EMAIL_PORTA; 
+        $this->Port = $_ENV['EMAIL_PORTA']; 
                 //smtp.dominio.com.br //seu servidor smtp
-        $this->Host = Config::EMAIL_HOST; 
+        $this->Host = $_ENV['EMAIL_HOST']; 
 		//define se tem ou autenticação no SMTP
-        $this->SMTPAuth = Config::EMAIL_SMTPAUTH; 
+        $this->SMTPAuth = $_ENV['EMAIL_SMTPAUTH']; 
                 // define dados do remetendo EMAIL, SENHA  da conta SMTP
-        $this->FromName    = Config::EMAIL_NOME;
-        $this->From        = Config::EMAIL_USER;
-        $this->Username    = Config::EMAIL_USER;
-        $this->Password    = Config::EMAIL_SENHA;
+        $this->FromName    = $_ENV['EMAIL_NOME'];
+        $this->From        = $_ENV['EMAIL_USER'];
+        $this->Username    = $_ENV['EMAIL_USER'];
+        $this->Password    = $_ENV['EMAIL_SENHA'];
        
     }
 
@@ -45,7 +45,7 @@ class EnviarEmail extends PHPMailer {
                 // email de resposta
                 //	$this->AddReplyTo($reply);
                 // email para receber  uma cópia
-     //   $this->Addcc(Config::EMAIL_COPIA);
+     //   $this->Addcc($_ENV['EMAIL_COPIA);
 		
                  //passando um laço para pegar todos os destinatarios		
 	    foreach($destinatarios as $email):

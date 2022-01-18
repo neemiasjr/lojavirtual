@@ -111,7 +111,7 @@ class Produtos extends Conexao
     {
         $i = 1;
         while ($lista = $this->ListarDados()):
-        $this->itens[$i] = array(
+            $this->itens[$i] = array(
              'pro_id' => $lista['pro_id'],
              'pro_nome'  => $lista['pro_nome'] ,
              'pro_desc'  => $lista['pro_desc'] ,

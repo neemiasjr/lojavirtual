@@ -473,9 +473,10 @@ class PagamentoPS extends Conexao{
     private function PedidoUpdate($codigo,$pago,$forma_pag,$referencia){        
                   
             // montando a SQL
-            $query = "UPDATE {$this->prefix}pedidos SET ped_pag_codigo = :cod, ped_pag_tipo = 'PAGSEGURO',";
+            $query = "UPDATE {$_ENV['DB_PREFIX']}pedidos SET ped_pag_codigo = :cod, ped_pag_tipo = 'PAGSEGURO',";
             $query .="ped_pag_status = :pago, ped_pag_forma = :forma  WHERE ped_ref = :ref";
            
+            
             // passando parâmetros                             
             $params = array(
                             ':cod'  =>$codigo,

@@ -48,7 +48,7 @@ class Correios
 				$this->servico2 = $this->sedex; // sedex
                 
                 //cep de origem, ou seja, de onde parte
-        $this->cepOrigem 	= Config::SITE_CEP;
+        $this->cepOrigem 	= "73255900";
                 
         //cep destino, ou seja, para onde vai ser mandado
         $this->cepDestino 	= $destino;

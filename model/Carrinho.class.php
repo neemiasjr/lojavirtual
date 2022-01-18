@@ -58,49 +58,79 @@ class Carrinho{
 	function CarrinhoADD($id){
 		$produtos = new Produtos();
 		$produtos->GetProdutosID($id);
-		foreach ($produtos->GetItens() as $pro) {
-			$ID = $pro['pro_id'];
-			$NOME  = $pro['pro_nome'];
-            $VALOR_US = $pro['pro_valor_us'];
-            $VALOR  = $pro['pro_valor'];
-            $PESO  = $pro['pro_peso'];
-            $QTD   = 1;
-            $IMG   = $pro['pro_img_p'];
-            $LINK  = Rotas::pag_ProdutosInfo().'/'.$ID.'/'.$pro['pro_slug'];
-            $ACAO  = $_POST['acao'];
-		}
 
-		switch ($ACAO) {
-			case 'add':
-					if(!isset($_SESSION['PRO'][$ID]['ID'])){
-						$_SESSION['PRO'][$ID]['ID'] = $ID;
-						$_SESSION['PRO'][$ID]['NOME']  = $NOME;
-					    $_SESSION['PRO'][$ID]['VALOR'] = $VALOR;
-					    $_SESSION['PRO'][$ID]['VALOR_US'] = $VALOR_US;
-					    $_SESSION['PRO'][$ID]['PESO']  = $PESO;
-					    $_SESSION['PRO'][$ID]['QTD']   = $QTD;
-					    $_SESSION['PRO'][$ID]['IMG']   = $IMG;
-					    $_SESSION['PRO'][$ID]['LINK']  = $LINK;  
-					}else{
-						 $_SESSION['PRO'][$ID]['QTD']   += $QTD;
+		
+
+		if(!empty($produtos->GetItens())){
+
+			foreach ($produtos->GetItens() as $pro) {
+				$ID = $pro['pro_id'];
+				$NOME  = $pro['pro_nome'];
+				$VALOR_US = $pro['pro_valor_us'];
+				$VALOR  = $pro['pro_valor'];
+				$PESO  = $pro['pro_peso'];
+				$QTD   = 1;
+				$IMG   = $pro['pro_img_p'];
+				$LINK  = Rotas::pag_ProdutosInfo().'/'.$ID.'/'.$pro['pro_slug'];
+				$ACAO  = $_POST['acao'];
+			}
+	
+			switch ($ACAO) {
+				case 'add':
+					if($pro['pro_estoque'] > 0){
+						if(!empty($_SESSION['PRO'][$ID]['QTD'])){
+							if(((int) $pro['pro_estoque'] - (int) $_SESSION['PRO'][$ID]['QTD'] >= 0 )){
+								if(!isset($_SESSION['PRO'][$ID]['ID'])){
+									$_SESSION['PRO'][$ID]['ID'] = $ID;
+									$_SESSION['PRO'][$ID]['NOME']  = $NOME;
+									$_SESSION['PRO'][$ID]['VALOR'] = $VALOR;
+									$_SESSION['PRO'][$ID]['VALOR_US'] = $VALOR_US;
+									$_SESSION['PRO'][$ID]['PESO']  = $PESO;
+									$_SESSION['PRO'][$ID]['QTD']   = $QTD;
+									$_SESSION['PRO'][$ID]['IMG']   = $IMG;
+									$_SESSION['PRO'][$ID]['LINK']  = $LINK; 
+								}else{
+									$_SESSION['PRO'][$ID]['QTD']   += $QTD;
+								}
+								echo '<h4 class="alert alert-success"> Produto Inserido! </h4>';
+								break;
+							}
+						}
+							
+						if(((int) $pro['pro_estoque'] - (int) $QTD >= 0 )){
+							if(!isset($_SESSION['PRO'][$ID]['ID'])){
+								$_SESSION['PRO'][$ID]['ID'] = $ID;
+								$_SESSION['PRO'][$ID]['NOME']  = $NOME;
+								$_SESSION['PRO'][$ID]['VALOR'] = $VALOR;
+								$_SESSION['PRO'][$ID]['VALOR_US'] = $VALOR_US;
+								$_SESSION['PRO'][$ID]['PESO']  = $PESO;
+								$_SESSION['PRO'][$ID]['QTD']   = $QTD;
+								$_SESSION['PRO'][$ID]['IMG']   = $IMG;
+								$_SESSION['PRO'][$ID]['LINK']  = $LINK; 
+							}else{
+									$_SESSION['PRO'][$ID]['QTD']   += $QTD;
+							}
+							echo '<h4 class="alert alert-success"> Produto Inserido! </h4>';
+							break;
+						}
 					}
-
-					echo '<h4 class="alert alert-success"> Produto Inserido! </h4>';
-
-				break;
-
-			case 'del':
-				$this->CarrinhoDEL($id);
-				echo '<h4 class="alert alert-success"> Produto Removido! </h4>';
-				break;
-
-			case 'limpar':
-				$this->CarrinhoLimpar();
-				echo '<h4 class="alert alert-success"> Produtos Removidos! </h4>';
-				break;
-			
-			
+					echo "<h4 class='alert alert-success'> Produto {$ID} - {$NOME} Sem Estoque! </h4>"; 
+					break;
+					
+				case 'del':
+					$this->CarrinhoDEL($id);
+					echo '<h4 class="alert alert-success"> Produto Removido! </h4>';
+					break;
+	
+				case 'limpar':
+					$this->CarrinhoLimpar();
+					echo '<h4 class="alert alert-success"> Produtos Removidos! </h4>';
+					break;
+				
+				
+			}
 		}
+		
 	}
 
 
