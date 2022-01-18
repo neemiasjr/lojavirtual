@@ -9,7 +9,7 @@ class Paginacao extends Conexao{
 		$this->ExecuteSQL($query);
 		$total = $this->TotalDados();
 
-		$this->limite = Config::BD_LIMIT_POR_PAG;
+		$this->limite = $_ENV['BD_LIMIT_POR_PAG'];
 		$paginas = ceil($total / $this->limite);
 		$this->totalpags = $paginas;
 
