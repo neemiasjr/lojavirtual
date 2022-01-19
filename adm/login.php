@@ -51,12 +51,13 @@ if (isset($_POST['recovery'])):
             
             $retornoEnvio = $enviar->Enviar($assunto, $msg, $destinatarios);
 
-            if(!empty($retornoEnvio)){
-              echo "Erro ao enviar email: $retornoEnvio";
-              die();
+            if(!$retornoEnvio){
+              echo '<div class="alert alert-danger"><b>Erro ao enviar e-mail!!!</b> </div>';
+            }else{
+              echo '<div class="alert alert-success"><b>Foi enviado um e-mail com a NOVA SENHA </b> </div>';
             }
             
-            echo '<div class="alert alert-success"> Foi enviado um email com a NOVA SENHA  </div>';
+            
             
         } catch(Exception $e) {
           echo "Erro ao enviar email: $e";
