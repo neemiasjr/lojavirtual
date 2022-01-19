@@ -11,7 +11,12 @@
   <link href="{$GET_TEMA}/tema/contatos/contatos.css" rel="stylesheet" type="text/css" />
   <script src="{$GET_TEMA}/tema/js/jquery-2.2.1.min.js" type="text/javascript"></script>
   <script src="{$GET_TEMA}/tema/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="{$GET_TEMA}/../view/vendor/js/notify.min.js" type="text/javascript"></script>
   <script src="{$GET_TEMA}/tema/contatos/contatos.js" type="text/javascript"></script>
+  <script src="{$GET_TEMA}/../media/js/index.js" type="text/javascript"></script>
+  <script src="{$GET_TEMA}/../media/js/produto_info.js" type="text/javascript"></script>
+  <script src="{$GET_TEMA}/../media/js/carrinho.js" type="text/javascript"></script>
+
   <!-- meu aquivo pessoal de CSS-->
   <link href="{$GET_TEMA}/tema/css/tema.css" rel="stylesheet" type="text/css" />
   <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
@@ -93,11 +98,11 @@
             </ul>
 
 
-            <form class="navbar-form navbar-right" role="search" method="POST" action="">
+            <form class="navbar-form navbar-right" role="search" method="POST" id="formBuscarProduto">
               <div class="form-group">
-                <input type="text" name="txt_buscar" class="form-control" placeholder="Digite para buscar" required>
+                <input type="text" name="txt_buscar" class="form-control txt_buscar" placeholder="Digite para buscar" required>
               </div>
-              <button type="submit" class="btn btn-primary">Buscar</button>
+              <button class="btn btn-primary">Buscar</button>
             </form>
 
           </div><!-- fim navbar collapse-->
@@ -147,12 +152,13 @@
         <!-- coluna direita CONYEUDO CENTRAL -->
         <div class="col-md-10">
 
-
+          <span class="errormsg"></span>
           <ul class="breadcrumb">
             <li><a href="#"><i class="glyphicon glyphicon-home"></i> Home </a></li>
             <li><a href="#"> Produtos </a></li>
             <li><a href="{$GET_SITE_HOME}/adm/login.php"> Pagina Adm. </a></li>
           </ul>
+
           <!-- fim do menu breadcrumb-->
 
           {php}

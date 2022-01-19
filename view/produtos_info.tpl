@@ -1,3 +1,5 @@
+
+
  {foreach from=$PRO item=P}
 
       <h3 class="text-center">{$P.pro_nome} - Ref: {$P.pro_ref}</h3>
@@ -27,7 +29,7 @@
         </div>
       
         <div class="col-md-6">
-            <form name="carrinho" method="post" action="{$PAG_COMPRAR}">
+            <form name="carrinho" method="post" action="{$PAG_COMPRAR}" id="formComprar">
                 <input type="hidden" name="pro_id" value="{$P.pro_id}">
                 <input type="hidden" name="acao" value="add">
             <button  class="btn btn-success btn-lg">Comprar</button>
