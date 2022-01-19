@@ -49,9 +49,15 @@ if (isset($_POST['recovery'])):
             $msg = ' Nova senha no ADM do site, nova senha:  ' .$senha;
             
             
-            $enviar->Enviar($assunto, $msg, $destinatarios);
-          
+            $retornoEnvio = $enviar->Enviar($assunto, $msg, $destinatarios);
+
+            if(!empty($retornoEnvio)){
+              echo "Erro ao enviar email: $retornoEnvio";
+              die();
+            }
+            
             echo '<div class="alert alert-success"> Foi enviado um email com a NOVA SENHA  </div>';
+            
         } catch(Exception $e) {
           echo "Erro ao enviar email: $e";
         }
