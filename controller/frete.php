@@ -33,11 +33,6 @@ require_once '../lib/autoload.php';
 
         echo '</span><br>';
   }
-        
-	
-        /**
-         * 
-         * 
 
 /* 40010 SEDEX Varejo
 40045 SEDEX a Cobrar Varejo

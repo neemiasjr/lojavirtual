@@ -114,7 +114,7 @@ class Carrinho{
 							break;
 						}
 					}
-					echo "<h4 class='alert alert-success'> Produto {$ID} - {$NOME} Sem Estoque! </h4>"; 
+					echo "<h4 class='alert alert-success'> Produto {$ID} - {$NOME} Produto esgotado! </h4>"; 
 					break;
 					
 				case 'del':

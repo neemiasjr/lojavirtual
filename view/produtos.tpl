@@ -58,7 +58,7 @@
 
                   <h4 class="text-center"><s>{$P.pro_nome}</s></h4>
 
-                  <h3 class="alert alert-info">Sem estoque</h3>
+                  <h3 class="alert alert-info">Produto esgotado</h3>
                 </div>
               </div>
              {/if}
